@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cristopher Noel Lopez | Creative Portfolio</title>
+  <meta name="description" content="Visual Designer & Front-End Enthusiast crafting eye-catching publication materials, posters, and digital visuals." />
+  <meta property="og:title" content="Cristopher Noel Lopez | Creative Portfolio" />
+  <meta property="og:description" content="Visual Designer & Front-End Enthusiast crafting eye-catching publication materials, posters, and digital visuals." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fira+Code:wght@300..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: hsl(264, 70%, 4%);
+      --foreground: hsl(260, 60%, 96%);
+      --card: hsl(264, 50%, 8%);
+      --primary: hsl(270, 70%, 70%);
+      --secondary: hsl(330, 80%, 70%);
+      --muted: hsl(264, 30%, 20%);
+      --muted-fg: hsl(260, 40%, 75%);
+      --accent: hsl(270, 60%, 50%);
+      --border: hsl(264, 30%, 15%);
+      --input: hsl(264, 30%, 18%);
+      --radius: 0.75rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.7;
+      letter-spacing: 0.2px;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--background); }
+    ::-webkit-scrollbar-thumb { background: hsl(270 70% 70% / 0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(270 70% 70% / 0.6); }
+
+    /* Utilities */
+    .glass {
+      background: hsl(264 50% 8% / 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid hsl(264 30% 15% / 0.6);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gradient-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      font-weight: 700;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .gradient-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+    .glow-primary { box-shadow: 0 0 40px hsl(270 70% 70% / 0.2), 0 0 80px hsl(270 70% 70% / 0.1); }
+    .glow-hover { transition: box-shadow 0.3s, transform 0.3s; }
+    .glow-hover:hover { box-shadow: 0 0 30px hsl(270 70% 70% / 0.25); transform: translateY(-4px); }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+    }
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted-fg);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-links a.active, .nav-links a:hover { color: var(--foreground); }
+    .nav-links a.active::after, .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+    }
+
+    /* Mobile menu */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--foreground);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-menu a {
+      display: block;
+      text-align: center;
+      color: var(--foreground);
+      text-decoration: none;
+      padding: 0.5rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--primary); }
+    .mobile-menu.open { display: flex; }
+
+    /* Sections */
+    section {
+      padding: 5rem 8%;
+      max-width: 100%;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* Hero */
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding-top: 7rem;
+    }
+    .hero-text h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero-text h2 {
+      font-size: clamp(1.1rem, 2vw, 1.375rem);
+      font-weight: 500;
+      color: var(--muted-fg);
+      margin-bottom: 1.5rem;
+    }
+    .hero-text p { color: hsl(260 60% 96% / 0.8); max-width: 42ch; margin-bottom: 2rem; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-card {
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .hero-icon-box {
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .hero-stat h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.875rem;
+      font-weight: 800;
+    }
+    .hero-stat span { font-size: 0.875rem; color: var(--muted-fg); }
+
+    /* Aura orbs */
+    .aura-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+      z-index: 0;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* About */
+    .about-card {
+      border-radius: 1.5rem;
+      padding: 3rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    .about-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+    .about-photo {
+      width: 14rem; height: 14rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 3px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .about-photo-inner {
+      width: 100%; height: 100%;
+      border-radius: calc(1rem - 3px);
+      overflow: hidden;
+      background: var(--card);
+    }
+    .about-photo-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
+    .skill-tag {
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: hsl(270 70% 70% / 0.15);
+      color: var(--primary);
+      border: 1px solid hsl(270 70% 70% / 0.3);
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+    .service-card {
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 0 30px hsl(270 70% 70% / 0.2); }
+    .service-icon {
+      width: 4rem; height: 4rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      transition: transform 0.3s;
+    }
+    .service-card:hover .service-icon { transform: scale(1.1); }
+    .service-card h4 { font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.875rem; color: var(--muted-fg); }
+
+    /* Why work with me */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+    .why-card { border-radius: 1rem; padding: 1.5rem; transition: box-shadow 0.3s; }
+    .why-card:hover { box-shadow: 0 0 25px hsl(270 70% 70% / 0.2); }
+    .why-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 0.75rem;
+      background: hsl(270 70% 70% / 0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      transition: background 0.3s;
+      color: var(--primary);
+    }
+    .why-card:hover .why-icon { background: hsl(270 70% 70% / 0.25); }
+    .why-card h4 { font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.875rem; color: var(--muted-fg); line-height: 1.7; }
+
+    /* Experience */
+    .exp-list { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      border-radius: 1rem; padding: 1.5rem;
+      position: relative; overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 8rem; height: 8rem;
+      background: radial-gradient(circle, hsl(270 70% 70% / 0.1), transparent 70%);
+    }
+    .exp-card:hover { box-shadow: 0 0 25px hsl(270 70% 70% / 0.2); }
+    .exp-inner { display: flex; gap: 1rem; align-items: flex-start; }
+    .exp-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #000;
+    }
+    .exp-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .exp-header h4 { font-weight: 700; font-size: 1.125rem; }
+    .exp-badge {
+      font-size: 0.75rem; font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background: hsl(270 70% 70% / 0.15);
+      color: var(--primary);
+    }
+    .exp-role { color: var(--secondary); font-weight: 500; margin-bottom: 0.75rem; }
+    .exp-highlights { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-highlights li { font-size: 0.875rem; color: var(--muted-fg); line-height: 1.7; display: flex; gap: 0.5rem; }
+    .exp-highlights li::before { content: '•'; color: var(--primary); flex-shrink: 0; }
+
+    /* Works / Carousel */
+    .carousel-section { margin-bottom: 3rem; }
+    .carousel-title { font-size: 1.25rem; font-weight: 600; text-align: center; margin-bottom: 1.5rem; color: var(--muted-fg); }
+    .carousel-wrapper { position: relative; }
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 0.5rem 2.5rem;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      z-index: 10;
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 9999px;
+      background: hsl(264 50% 8% / 0.8);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .carousel-btn:hover { background: hsl(270 70% 70% / 0.2); }
+    .carousel-btn.prev { left: 0; }
+    .carousel-btn.next { right: 0; }
+    .work-card {
+      width: 18rem; flex-shrink: 0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .work-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 0 25px hsl(270 70% 70% / 0.2); }
+    .work-card img { width: 100%; height: 11rem; object-fit: cover; display: block; }
+    .work-card-body { padding: 1rem; text-align: center; }
+    .work-card-body h5 { font-weight: 500; }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+      background: hsl(0 0% 0% / 0.8);
+      backdrop-filter: blur(8px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      border-radius: 1.25rem;
+      max-width: 56rem;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.92);
+      transition: transform 0.2s;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1); }
+    .modal-inner { padding: 2rem; }
+    .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+    .modal-label { font-size: 0.75rem; font-weight: 500; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; }
+    .modal-close {
+      background: none; border: none; color: var(--foreground); cursor: pointer;
+      padding: 0.5rem; border-radius: 9999px;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: hsl(270 70% 70% / 0.15); }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .modal-img { width: 100%; border-radius: 0.75rem; }
+    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .modal-desc { color: var(--muted-fg); margin-bottom: 1.5rem; line-height: 1.7; }
+    .tech-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; color: hsl(260 60% 96% / 0.7); }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tech-tag {
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem; font-weight: 500;
+      background: var(--muted); border: 1px solid var(--border);
+    }
+    .modal-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+    .modal-btn-primary {
+      width: 100%; padding: 0.75rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      text-decoration: none; color: #000;
+    }
+    .modal-btn-secondary {
+      width: 100%; padding: 0.75rem;
+      border-radius: 0.75rem;
+      font-weight: 500;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-btn-secondary:hover { background: hsl(260 60% 96% / 0.05); }
+
+    /* Certifications */
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; max-width: 64rem; margin: 0 auto; }
+    .cert-card {
+      border-radius: 0.75rem; padding: 1.25rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: background 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .cert-card:hover { background: hsl(260 60% 96% / 0.03); box-shadow: 0 0 20px hsl(270 70% 70% / 0.15); }
+    .cert-icon { flex-shrink: 0; }
+    .cert-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; transition: color 0.2s; }
+    .cert-card:hover h4 { color: var(--primary); }
+    .cert-card p { font-size: 0.875rem; color: var(--muted-fg); line-height: 1.6; }
+
+    /* Contact */
+    .contact-form {
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 36rem;
+      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      background: var(--input);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px hsl(270 70% 70% / 0.15);
+    }
+    .form-textarea { resize: none; }
+    .form-submit {
+      width: 100%; padding: 0.75rem;
+      border-radius: 0.75rem;
+      font-size: 1rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
+    .social-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--muted-fg); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--primary); }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted-fg);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Animations */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-in { opacity: 0; transition: opacity 0.6s ease; }
+    .fade-in.visible { opacity: 1; }
+
+    /* SVG icons inline */
+    svg { display: inline-block; vertical-align: middle; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #home { grid-template-columns: 1fr; padding-top: 6rem; text-align: center; }
+      .hero-btns { justify-content: center; }
+      .hero-card { display: none; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .mobile-toggle { display: block; }
+      .about-inner { align-items: center; }
+      .about-text { text-align: center; }
+      .modal-grid { grid-template-columns: 1fr; }
+      .skills-list { justify-content: center; }
+    }
+    @media (min-width: 769px) {
+      .about-inner { flex-direction: row; }
+      .about-text { text-align: left; }
+      .skills-list { justify-content: flex-start; }
+    }
+
+    /* Counter animation */
+    .counter { display: inline-block; }
+  </style>
+</head>
+<body>
+
+<!-- Aura orbs -->
+<div class="aura-orb" style="width:12rem;height:12rem;background:radial-gradient(circle,hsl(270 70% 70%/0.2),transparent 70%);top:5rem;left:2.5rem;"></div>
+<div class="aura-orb" style="width:16rem;height:16rem;background:radial-gradient(circle,hsl(330 80% 70%/0.15),transparent 70%);top:10rem;right:5rem;animation-delay:4s;"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="workModal" onclick="closeModal(event)">
+  <div class="modal-box glass glow-primary" onclick="event.stopPropagation()">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <span class="modal-label">Sample Work</span>
+        <button class="modal-close" onclick="closeModalDirect()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-grid">
+        <div>
+          <img class="modal-img" id="modalImg" src="" alt="" />
+        </div>
+        <div>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div id="modalTechs"></div>
+          <div class="modal-btns">
+            <a id="modalLiveLink" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn-primary gradient-btn" style="display:none;">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Visit Live Site
+            </a>
+            <button class="modal-btn-secondary" onclick="closeModalDirect()">Close Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="glass">
+  <nav>
+    <a href="#home" class="nav-logo">&lt;CNL /&gt;</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#certifications">Badges</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="gradient-btn nav-cta">Let's Work</a>
+    <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobile()" aria-label="Menu">
+      <svg id="menuIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="closeIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </nav>
+  <div class="mobile-menu glass" id="mobileMenu">
+    <a href="#home" onclick="closeMobile()">Home</a>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#services" onclick="closeMobile()">Services</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#works" onclick="closeMobile()">Works</a>
+    <a href="#certifications" onclick="closeMobile()">Badges</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home">
+  <div class="hero-text fade-up">
+    <span style="display:inline-block;margin-bottom:0.75rem;color:var(--muted-fg);font-size:0.875rem;font-weight:600;letter-spacing:0.05em;">
+      Graphic Designer • Creative Developer
+    </span>
+    <h1>Hi, I am <span class="gradient-text">Topher</span></h1>
+    <h2>Visual Designer & Front-End Enthusiast</h2>
+    <p>Crafting eye-catching publication materials, posters, and digital visuals — with clean, modern design and a creative edge.</p>
+    <div class="hero-btns">
+      <a href="#works" class="gradient-btn" style="padding:0.75rem 1.5rem;border-radius:9999px;">View My Works</a>
+      <a href="#contact" style="padding:0.75rem 1.5rem;border-radius:9999px;border:1px solid var(--primary);color:var(--primary);text-decoration:none;font-weight:700;transition:background 0.2s;" onmouseover="this.style.background='hsl(270 70% 70%/0.1)'" onmouseout="this.style.background='transparent'">Shall we get started?</a>
+    </div>
+  </div>
+
+  <div class="hero-card glass glow-primary fade-in">
+    <div class="hero-icon-box glass">
+      <svg width="32" height="32" fill="none" stroke="hsl(270,70%,70%)" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <p style="font-size:0.875rem;font-weight:500;margin-top:0.5rem;">Creative Designer</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <h3 class="gradient-text"><span class="counter" data-target="20">0</span>+</h3>
+        <span>Projects</span>
+      </div>
+      <div class="hero-stat">
+        <h3 class="gradient-text"><span class="counter" data-target="20">0</span>+</h3>
+        <span>Clients</span>
+      </div>
+      <div class="hero-stat">
+        <h3 class="gradient-text"><span class="counter" data-target="3">0</span>+</h3>
+        <span>Years</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+  <h2 class="section-title">About Me</h2>
+  <div class="about-card glass glow-hover fade-up">
+    <div class="about-inner">
+      <div class="about-photo">
+        <div class="about-photo-inner">
+          <img src="images/me.png" alt="Cristopher Noel Lopez" onerror="this.parentElement.style.background='linear-gradient(135deg,hsl(270,70%,30%),hsl(330,80%,40%))'"/>
+        </div>
+      </div>
+      <div class="about-text flex-1">
+        <h4 style="font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;">Hello, I'm Cristopher Noel Lopez</h4>
+        <p style="color:hsl(260 60% 96%/0.8);margin-bottom:1.5rem;line-height:1.7;">
+          I am a third-year college student and a passionate visual designer specializing in digital and print media. I combine creativity and technical skills to deliver polished, effective, and visually compelling solutions.
+        </p>
+        <div class="skills-list">
+          <span class="skill-tag">Graphic Design</span>
+          <span class="skill-tag">Publication Materials</span>
+          <span class="skill-tag">Brand & Apparel</span>
+          <span class="skill-tag">Video Editing</span>
+          <span class="skill-tag">Web & UI Design</span>
+        </div>
+        <p style="color:var(--muted-fg);font-size:0.875rem;margin-bottom:1.5rem;">I thrive in collaborative environments and continuously explore new trends in design and technology.</p>
+        <a href="#contact" class="gradient-btn" style="padding:0.75rem 1.5rem;border-radius:9999px;display:inline-block;">Let's Collaborate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services">
+  <h2 class="section-title">Services</h2>
+  <div class="services-grid">
+    <div class="service-card glass fade-up">
+      <div class="service-icon">
+        <svg width="32" height="32" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+      </div>
+      <h4>Publication Design</h4>
+      <p>Posters, pubmats, DP blasts, tournament & school materials</p>
+    </div>
+    <div class="service-card glass fade-up" style="transition-delay:0.1s;">
+      <div class="service-icon">
+        <svg width="32" height="32" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h4>Brand & Apparel Design</h4>
+      <p>Anime-inspired shirts, merch concepts, and visuals</p>
+    </div>
+    <div class="service-card glass fade-up" style="transition-delay:0.2s;">
+      <div class="service-icon">
+        <svg width="32" height="32" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <h4>Video Editing</h4>
+      <p>Short-form edits, promotional and social media videos</p>
+    </div>
+    <div class="service-card glass fade-up" style="transition-delay:0.3s;">
+      <div class="service-icon">
+        <svg width="32" height="32" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24"><globe-svg/><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h4>Web Design</h4>
+      <p>Clean portfolio and landing pages using HTML, CSS & JS</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Work With Me -->
+<section id="why-me" style="padding-top:3rem;">
+  <span style="display:block;text-align:center;font-size:0.875rem;font-weight:500;color:var(--muted-fg);margin-bottom:0.5rem;">Why Choose Me</span>
+  <h2 class="section-title">Why <span class="gradient-text">Work With Me</span></h2>
+  <p style="text-align:center;color:var(--muted-fg);max-width:40ch;margin:0 auto 3rem;">Bringing passion, adaptability, and quality to every project</p>
+  <div class="why-grid">
+    <div class="why-card glass fade-up">
+      <div class="why-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      </div>
+      <h4>Explorative & Passionate</h4>
+      <p>I enjoy exploring technology while building—projects don't feel repetitive, they evolve.</p>
+    </div>
+    <div class="why-card glass fade-up" style="transition-delay:0.1s;">
+      <div class="why-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h4>Fast Learner & Adaptable</h4>
+      <p>I adjust quickly to new stacks and environments even if unfamiliar at first.</p>
+    </div>
+    <div class="why-card glass fade-up" style="transition-delay:0.2s;">
+      <div class="why-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.522 4.82 3.889 6.204L6 21l4.443-2.18A10.2 10.2 0 0 0 12 19c4.97 0 9-3.582 9-8S16.97 3 12 3z"/></svg>
+      </div>
+      <h4>Detail-Oriented</h4>
+      <p>I pay close attention to design details, ensuring polished and professional outputs.</p>
+    </div>
+    <div class="why-card glass fade-up" style="transition-delay:0.3s;">
+      <div class="why-icon">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h4>Collaborative & Reliable</h4>
+      <p>I thrive in team environments and consistently deliver quality work on time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Work Experience -->
+<section id="experience">
+  <h2 class="section-title">Work Experience</h2>
+  <div class="exp-list">
+    <div class="exp-card glass fade-up">
+      <div class="exp-inner">
+        <div class="exp-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="exp-header">
+            <h4>Concentrix Corporation</h4>
+            <span class="exp-badge">AUG 2025 - DEC 2025</span>
+          </div>
+          <p class="exp-role">Provider Services Agent</p>
+          <ul class="exp-highlights">
+            <li>Assisted healthcare providers in verifying member eligibility, benefits coverage, and insurance information.</li>
+            <li>Supported providers with claim-related inquiries, including status checks, denial reasons, and underpaid claims.</li>
+            <li>Delivered efficient professional support through inbound and outbound calls, consistently meeting quality metrics.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card glass fade-up" style="transition-delay:0.1s;">
+      <div class="exp-inner">
+        <div class="exp-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="exp-header">
+            <h4>VXI Global Holdings B.V. Philippines</h4>
+            <span class="exp-badge">AUG 2024 - MARCH 2025</span>
+          </div>
+          <p class="exp-role">Customer Service Representative</p>
+          <ul class="exp-highlights">
+            <li>Handled customer inquiries related to financial products and services with professionalism and accuracy.</li>
+            <li>Assisted customers in resolving account issues, billing disputes, and transaction inquiries.</li>
+            <li>Delivered high-quality support through inbound and outbound calls and met performance metrics.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card glass fade-up" style="transition-delay:0.2s;">
+      <div class="exp-inner">
+        <div class="exp-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="exp-header">
+            <h4>Doneverse (formerly Outsourced Doers)</h4>
+            <span class="exp-badge">DEC 2024 - MAY 2025</span>
+          </div>
+          <p class="exp-role">Digital Marketing Virtual Assistant</p>
+          <ul class="exp-highlights">
+            <li>Completed hands-on training as a Digital Marketing Virtual Assistant under Doneverse,
+focusing on real-world digital workflows.</li>
+            <li>Assisted in graphic design tasks for social media posts, branding assets, and marketing
+visuals.
+</li>
+            <li>Supported website development projects, including basic page edits, layout
+improvements, and content updates.</li>
+<li>Helped build and optimize marketing funnels to improve lead generation and
+conversion flow.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card glass fade-up" style="transition-delay:0.3s;">
+      <div class="exp-inner">
+        <div class="exp-icon" style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#000;">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="exp-header">
+            <h4>Creatives Committee</h4>
+            <span class="exp-badge">2023 - 2025</span>
+          </div>
+          <p class="exp-role">Graphic Designer (School Officer)</p>
+          <ul class="exp-highlights">
+            <li>Organized and led creative initiatives for school events as a School Officer in the Creatives Committee.</li>
+            <li>Produced visual content using Photoshop and Canva, and edited videos for promotions and presentations.</li>
+            <li>Collaborated with teams to support campus activities and branding.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Works Section -->
+<section id="works">
+  <h2 class="section-title">Sample Works</h2>
+
+  <!-- Websites -->
+  <div class="carousel-section">
+    <p class="carousel-title">Websites</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scroll('websites',-1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" id="track-websites">
+        <div class="work-card glass" onclick="openModal({title:'Hollow Cinema',image:'images/hollow.png',description:'A dark-themed movie streaming platform concept with a focus on immersive user experience and anime content.',technologies:['React','Tailwind CSS','Framer Motion'],liveUrl:'https://noelskie05.github.io/hollow-cine/'})">
+          <img src="images/hollow.png" alt="Hollow Cinema" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Hollow Cinema</text></svg>'"/>
+          <div class="work-card-body"><h5>Hollow Cinema</h5></div>
+        </div>
+        <div class="work-card glass" onclick="openModal({title:'Velvet Cinema',image:'images/velvet.png',description:'A sophisticated cinema booking and movie information platform with an elegant red and black aesthetic.',technologies:['React','Tailwind CSS','Vite'],liveUrl:'https://noelskie05.github.io/velvet-cinema/'})">
+          <img src="images/velvet.png" alt="Velvet Cinema" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Velvet Cinema</text></svg>'"/>
+          <div class="work-card-body"><h5>Velvet Cinema</h5></div>
+        </div>
+        <div class="work-card glass" onclick="openModal({title:'Gala Crafters',image:'images/gala.png',description:'A luxury catering and event planning website showcasing unforgettable culinary experiences with a golden aesthetic.',technologies:['HTML','CSS','JavaScript'],liveUrl:'https://noelskie05.github.io/noelskie.github.io/'})">
+          <img src="images/gala.png" alt="Gala Crafters" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Gala Crafters</text></svg>'"/>
+          <div class="work-card-body"><h5>Gala Crafters</h5></div>
+        </div>
+      </div>
+      <button class="carousel-btn next" onclick="scroll('websites',1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Apparel -->
+  <div class="carousel-section">
+    <p class="carousel-title">Apparel</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scroll('apparel',-1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" id="track-apparel">
+        <div class="work-card glass" onclick="openModal({title:'Itadori Yuji Tee',image:'images/yuji.jpg',description:'Jujutsu Kaisen inspired Vessel tee design featuring Yuji Itadori.',technologies:['Photoshop']})"><img src="images/yuji.jpg" alt="Yuji Tee" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Yuji Tee</text></svg>'"/><div class="work-card-body"><h5>Itadori Yuji Tee</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Fushiguro Toji Tee',image:'images/toji.jpg',description:'Minimalist streetwear design featuring Toji Fushiguro from Jujutsu Kaisen.',technologies:['Photoshop']})"><img src="images/toji.jpg" alt="Toji Tee" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Toji Tee</text></svg>'"/><div class="work-card-body"><h5>Fushiguro Toji Tee</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Tomie Kawakami Exclusive',image:'images/tomie.jpg',description:'Junji Ito inspired Tomie Kawakami exclusive apparel design.',technologies:['Photoshop']})"><img src="images/tomie.jpg" alt="Tomie" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Tomie</text></svg>'"/><div class="work-card-body"><h5>Tomie Kawakami Exclusive</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Heavenly Thighs Apparel',image:'images/heavenly.jpg',description:'Main branding visual for the Heavenly Thighs apparel line.',technologies:['Photoshop']})"><img src="images/heavenly.jpg" alt="Heavenly" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Heavenly</text></svg>'"/><div class="work-card-body"><h5>Heavenly Thighs Apparel</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'JJK Action Shot 1',image:'images/apparel_1.jpg',description:'Action-oriented character design for back-print apparel.',technologies:['Photoshop']})"><img src="images/apparel_1.jpg" alt="Apparel 1" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Apparel 1</text></svg>'"/><div class="work-card-body"><h5>JJK Action Shot 1</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Sukuna Tee',image:'images/sukuna.jpg',description:'King of Curses inspired apparel design.',technologies:['Photoshop']})"><img src="images/sukuna.jpg" alt="Sukuna" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Sukuna</text></svg>'"/><div class="work-card-body"><h5>Sukuna Tee</h5></div></div>
+      </div>
+      <button class="carousel-btn next" onclick="scroll('apparel',1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Lanyards -->
+  <div class="carousel-section">
+    <p class="carousel-title">Lanyards</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scroll('lanyards',-1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" id="track-lanyards">
+        <div class="work-card glass" onclick="openModal({title:'BSIS Lanyard Design 1',image:'images/lanyard_1.png',description:'Lanyard mockup design for the BSIS Council featuring university branding.',technologies:['Photoshop']})"><img src="images/lanyard_1.png" alt="Lanyard 1" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Lanyard 1</text></svg>'"/><div class="work-card-body"><h5>BSIS Lanyard Design 1</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'BSIS Lanyard Design 2',image:'images/lanyard_2.png',description:'Second lanyard mockup design for the BSIS Council.',technologies:['Photoshop']})"><img src="images/lanyard_2.png" alt="Lanyard 2" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Lanyard 2</text></svg>'"/><div class="work-card-body"><h5>BSIS Lanyard Design 2</h5></div></div>
+      </div>
+      <button class="carousel-btn next" onclick="scroll('lanyards',1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- DP Blasts -->
+  <div class="carousel-section">
+    <p class="carousel-title">DP Blasts</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scroll('dpblasts',-1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" id="track-dpblasts">
+        <div class="work-card glass" onclick="openModal({title:'Marketista AI',image:'images/dp_blast_1.png',description:'AI-Powered Marketing DP blast featuring digital growth concepts.',technologies:['Canva']})"><img src="images/dp_blast_1.png" alt="DP Blast 1" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>DP Blast 1</text></svg>'"/><div class="work-card-body"><h5>Marketista AI</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Unlock the Code',image:'images/dp_blast_2.png',description:'Dynamic DP blast design for Unlock the Code seminar at New Era University.',technologies:['Canva']})"><img src="images/dp_blast_2.png" alt="DP Blast 2" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>DP Blast 2</text></svg>'"/><div class="work-card-body"><h5>Unlock the Code</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Join Our DP Blast',image:'images/join_dp.png',description:'Promotional visual for seminar participation.',technologies:['Canva']})"><img src="images/join_dp.png" alt="Join DP" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Join DP</text></svg>'"/><div class="work-card-body"><h5>Join Our DP Blast</h5></div></div>
+      </div>
+      <button class="carousel-btn next" onclick="scroll('dpblasts',1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pubmats -->
+  <div class="carousel-section">
+    <p class="carousel-title">Pubmats</p>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" onclick="scroll('pubmats',-1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" id="track-pubmats">
+        <div class="work-card glass" onclick="openModal({title:'BSIS North & South Graduates',image:'images/bsis_4.png',description:'Graduation celebration pubmat for BSIS North & South graduates.',technologies:['Photoshop','Canva']})"><img src="images/bsis_4.png" alt="BSIS 4" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>BSIS Grads</text></svg>'"/><div class="work-card-body"><h5>BSIS North & South Graduates</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'BSIS Representatives',image:'images/bsis_3.png',description:'Official representatives pubmat for CLAS Fair 2024.',technologies:['Photoshop']})"><img src="images/bsis_3.png" alt="BSIS 3" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>BSIS Reps</text></svg>'"/><div class="work-card-body"><h5>BSIS Representatives</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Magna Cum Laude Recognition',image:'images/grad.png',description:'Recognition pubmat for academic excellence and honors.',technologies:['Canva']})"><img src="images/grad.png" alt="Grad" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>Grad</text></svg>'"/><div class="work-card-body"><h5>Magna Cum Laude Recognition</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'BSIS Qualifying Tournament',image:'images/bsis_1.png',description:'Tournament promotion featuring Mobile Legends visuals.',technologies:['Photoshop','Canva']})"><img src="images/bsis_1.png" alt="BSIS 1" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>BSIS Tourney</text></svg>'"/><div class="work-card-body"><h5>BSIS Qualifying Tournament</h5></div></div>
+        <div class="work-card glass" onclick="openModal({title:'Elevate Innovate Educate',image:'images/bsis_2.png',description:'General Assembly promotional material with arcade aesthetic.',technologies:['Photoshop']})"><img src="images/bsis_2.png" alt="BSIS 2" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;288&quot; height=&quot;176&quot; style=&quot;background:hsl(264,50%,12%)&quot;><text x=&quot;50%&quot; y=&quot;50%&quot; fill=&quot;hsl(270,70%,70%)&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;14&quot; font-family=&quot;sans-serif&quot;>BSIS GA</text></svg>'"/><div class="work-card-body"><h5>Elevate Innovate Educate</h5></div></div>
+      </div>
+      <button class="carousel-btn next" onclick="scroll('pubmats',1)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications Section -->
+<section id="certifications">
+  <h2 class="section-title">Badges I've <span class="gradient-text">completed</span></h2>
+  <div class="certs-grid">
+    <div class="cert-card glass fade-up">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="hsl(270,70%,70%)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Digital Marketing Foundations</h4><p>I took a deep-dive into Digital Marketing strategy and the Blueprint to online business growth</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.05s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="#34d399" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Social Media</h4><p>I learned social set-up, content creation, video editing, scheduling + analytics/reporting</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.1s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="hsl(270,70%,70%)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Business Admin Support</h4><p>I created forms, surveys, online calendars, SOPs and other admin projects</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.15s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="#34d399" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Websites + SEO</h4><p>I mastered the basics of website creation, blogging, and on-page + off-page SEO</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.2s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="hsl(270,70%,70%)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Customer Support</h4><p>I learned how to manage inboxes, set-up Helpdesks, track metrics + manage projects</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.25s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="#34d399" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Email Marketing</h4><p>I learned the principles of prospect + customer nurtures, copywriting and practiced in the tools</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.3s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="hsl(270,70%,70%)" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Marketing Design</h4><p>I completed a deep-dive in Canva Marketing Design and created a range of graphics</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.35s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="#34d399" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>Marketing Funnels</h4><p>I've created 2 Funnels and gained insights into the top funnel strategies, copywriting and tools</p></div>
+    </div>
+    <div class="cert-card glass fade-up" style="transition-delay:0.4s;">
+      <div class="cert-icon"><svg width="40" height="48" fill="none" stroke="#34d399" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div><h4>VA Foundations</h4><p>I learned the principles of communication, initiative, AI hacks, cyber-security, health/wellness + more</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-form glass fade-up">
+    <input type="text" placeholder="Name" class="form-input" />
+    <input type="email" placeholder="Email" class="form-input" />
+    <textarea placeholder="Message" rows="5" class="form-textarea form-input"></textarea>
+    <button type="button" class="gradient-btn form-submit" onclick="this.textContent='Sent! ✓';setTimeout(()=>this.textContent='Send Message',2500)">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Send Message
+    </button>
+  </div>
+  <div class="social-links">
+    <a href="https://www.facebook.com/cristopherlopez.05/" class="social-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Facebook
+    </a>
+    <a href="https://www.instagram.com/topeppers_" class="social-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Instagram
+    </a>
+    <a href="https://github.com/noelskie05" class="social-link">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Cristopher Noel Lopez. All rights reserved.</p>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMobile() {
+    const menu = document.getElementById('mobileMenu');
+    const icon = document.getElementById('menuIcon');
+    const close = document.getElementById('closeIcon');
+    const open = menu.classList.toggle('open');
+    icon.style.display = open ? 'none' : '';
+    close.style.display = open ? '' : 'none';
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('menuIcon').style.display = '';
+    document.getElementById('closeIcon').style.display = 'none';
+  }
+
+  // Active nav
+  const navLinks = document.querySelectorAll('.nav-links a');
+  function updateNav() {
+    const sections = document.querySelectorAll('section[id]');
+    let current = 'home';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 150) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+
+  // Carousel scroll
+  function scroll(id, dir) {
+    const track = document.getElementById('track-' + id);
+    if (track) track.scrollBy({ left: dir * 320, behavior: 'smooth' });
+  }
+
+  // Modal
+  function openModal(work) {
+    document.getElementById('modalImg').src = work.image;
+    document.getElementById('modalImg').alt = work.title;
+    document.getElementById('modalTitle').textContent = work.title;
+    document.getElementById('modalDesc').textContent = work.description || '';
+
+    const techsEl = document.getElementById('modalTechs');
+    if (work.technologies && work.technologies.length) {
+      techsEl.innerHTML = `<p class="tech-label">Technologies</p><div class="tech-tags">${work.technologies.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div>`;
+    } else {
+      techsEl.innerHTML = '';
+    }
+
+    const liveLink = document.getElementById('modalLiveLink');
+    if (work.liveUrl) {
+      liveLink.href = work.liveUrl;
+      liveLink.style.display = 'flex';
+    } else {
+      liveLink.style.display = 'none';
+    }
+
+    document.getElementById('workModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('workModal')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('workModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+
+  // Counters
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.target;
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let count = 0;
+      const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) { el.textContent = target; clearInterval(timer); }
+        else el.textContent = Math.floor(count);
+      }, 16);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+</script>
+</body>
+</html>
